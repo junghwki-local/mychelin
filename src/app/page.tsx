@@ -1,65 +1,63 @@
-import Image from "next/image";
+import FeedCard from "@/components/feed/FeedCard";
 
-export default function Home() {
+const MOCK_FEED = [
+  {
+    id: "1",
+    name: "을지로 돼지갈비",
+    category: "한식",
+    address: "서울 중구 을지로 123",
+    rating: 4,
+    reviewCount: 24,
+    distance: "230m",
+    thumbnailUrl: null,
+    author: { name: "김정환", avatarUrl: null },
+    comment: "고기가 두툼하고 불향이 장난없어요. 혼밥하기도 좋고 웨이팅은 평일 기준 20분 정도.",
+    createdAt: "2시간 전",
+  },
+  {
+    id: "2",
+    name: "스시 하루",
+    category: "일식",
+    address: "서울 강남구 청담동 45",
+    rating: 5,
+    reviewCount: 8,
+    distance: "1.2km",
+    thumbnailUrl: null,
+    author: { name: "이지훈", avatarUrl: null },
+    comment: "가격 대비 퀄리티가 정말 좋습니다. 오마카세 6만원인데 이 가격에 이 퀄리티면 무조건 재방문.",
+    createdAt: "5시간 전",
+  },
+  {
+    id: "3",
+    name: "성수 커피 로스터스",
+    category: "카페",
+    address: "서울 성동구 성수이로 78",
+    rating: 4,
+    reviewCount: 41,
+    distance: "3.4km",
+    thumbnailUrl: null,
+    author: { name: "박소연", avatarUrl: null },
+    comment: "스페셜티 원두를 직접 로스팅해요. 에스프레소가 특히 좋고 공간도 작업하기 딱 좋은 분위기.",
+    createdAt: "어제",
+  },
+];
+
+export default function FeedPage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex flex-col">
+      <header className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center justify-between">
+        <h1 className="text-xl font-black tracking-tight text-primary">Mychelin</h1>
+        <div className="flex gap-1 text-sm">
+          <button className="px-3 py-1 rounded-full bg-primary text-white font-semibold text-xs">근처</button>
+          <button className="px-3 py-1 rounded-full text-muted font-semibold text-xs">팔로잉</button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </header>
+
+      <div className="flex flex-col">
+        {MOCK_FEED.map((item) => (
+          <FeedCard key={item.id} {...item} />
+        ))}
+      </div>
     </div>
   );
 }
